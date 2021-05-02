@@ -1,6 +1,6 @@
+import ActionButton from "./ActionButton";
 import { fireEvent, render } from "@testing-library/react";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import ActionButton from "./ActionButton";
 
 test("Renders the correct content", () => {
   const { getByLabelText } = render(
