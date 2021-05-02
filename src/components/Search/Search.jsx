@@ -51,6 +51,7 @@ Search.propTypes = {
 
 const styles = (theme) => ({
   container: {
+    width: "100%",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     transition: theme.transitions.create("background-color"),
@@ -58,8 +59,7 @@ const styles = (theme) => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: "auto",
     },
   },
@@ -78,14 +78,14 @@ const styles = (theme) => ({
     color: "inherit",
   },
   searchBar: {
+    width: "100%",
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4.5)}px)`,
     transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
+    [theme.breakpoints.up("md")]: {
+      width: "30ch",
       "&:focus": {
-        width: "30ch",
+        width: "45ch",
       },
     },
   },
