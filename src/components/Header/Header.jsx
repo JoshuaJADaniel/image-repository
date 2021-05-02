@@ -12,7 +12,7 @@ import Menu from "components/Menu";
 import Search from "components/Search";
 
 const Header = ({ classes }) => (
-  <AppBar position="static">
+  <AppBar>
     <Toolbar>
       <MuiLink
         to="/"
