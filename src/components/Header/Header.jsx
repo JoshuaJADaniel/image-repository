@@ -11,7 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Menu from "components/Menu";
 import Search from "components/Search";
 
-const Header = ({ classes }) => (
+const Header = ({ dark, setDark, classes }) => (
   <AppBar>
     <Toolbar>
       <MuiLink
@@ -29,12 +29,14 @@ const Header = ({ classes }) => (
       </MuiLink>
       <Search />
       <div className={classes.grow} />
-      <Menu />
+      <Menu dark={dark} setDark={setDark} />
     </Toolbar>
   </AppBar>
 );
 
 Header.propTypes = {
+  dark: PropTypes.bool.isRequired,
+  setDark: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
