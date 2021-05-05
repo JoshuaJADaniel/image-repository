@@ -5,17 +5,19 @@ import Button from "@material-ui/core/Button";
 
 import HomeIcon from "@material-ui/icons/Home";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
+import DarknessIcon from "@material-ui/icons/Brightness4";
+import BrightnessIcon from "@material-ui/icons/Brightness7";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import ActionLink from "components/ActionLink";
 import ActionButton from "components/ActionButton";
 
-import { withStyles } from "@material-ui/core/styles";
 import { toggleTheme } from "styles/themeStorage";
+import useStyles from "./Menu.styles";
 
-const Menu = ({ dark, setDark, classes }) => {
+const Menu = ({ dark, setDark }) => {
+  const classes = useStyles();
+
   const handleNotifications = () => {
     console.log("Notifications");
   };
@@ -55,7 +57,7 @@ const Menu = ({ dark, setDark, classes }) => {
           tooltip="Toggle Theme"
           onClick={handleTheme}
           className={classes.iconButton}
-          icon={dark ? <Brightness7Icon /> : <Brightness4Icon />}
+          icon={dark ? <BrightnessIcon /> : <DarknessIcon />}
         />
       </Box>
       <Button color="inherit" className={classes.loginButton}>
@@ -73,30 +75,6 @@ const Menu = ({ dark, setDark, classes }) => {
 Menu.propTypes = {
   dark: PropTypes.bool.isRequired,
   setDark: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
-const styles = (theme) => ({
-  wrapper: {
-    display: "flex",
-    alignItems: "center",
-  },
-  iconButton: {
-    [theme.breakpoints.up("sm")]: {
-      marginRight: theme.spacing(0.5),
-    },
-  },
-  loginButton: {
-    margin: 0,
-    [theme.breakpoints.up("sm")]: {
-      margin: theme.spacing(0, 1, 0, 0),
-    },
-    [theme.breakpoints.down("xs")]: {
-      paddingLeft: theme.spacing(0.2),
-      paddingRight: theme.spacing(0.2),
-      minWidth: "unset",
-    },
-  },
-});
-
-export default withStyles(styles)(Menu);
+export default Menu;
