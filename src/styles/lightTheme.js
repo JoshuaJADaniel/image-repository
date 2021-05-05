@@ -1,6 +1,6 @@
 import { grey } from "@material-ui/core/colors";
 
-const material = {
+const lightTheme = {
   palette: {
     border: grey[300],
     primary: {
@@ -9,4 +9,4 @@ const material = {
   },
 };
 
-export default material;
+export default lightTheme;

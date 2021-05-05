@@ -1,6 +1,6 @@
 import { grey } from "@material-ui/core/colors";
 
-const material = {
+const darkTheme = {
   palette: {
     type: "dark",
     border: grey[800],
@@ -13,4 +13,4 @@ const material = {
   },
 };
 
-export default material;
+export default darkTheme;
