@@ -53,10 +53,10 @@ const styles = makeStyles((theme) => ({
       opacity: 0,
       margin: theme.spacing(1, 0.5),
       color: theme.palette.getContrastText(theme.palette.background.default),
-      backgroundColor: fade(theme.palette.background.default, 0.7),
+      backgroundColor: fade(theme.palette.background.paper, 0.7),
       transition: theme.transitions.create(["opacity", "background-color"]),
       "&:hover": {
-        backgroundColor: fade(theme.palette.background.default, 0.9),
+        backgroundColor: fade(theme.palette.background.paper, 0.9),
       },
     },
   },

@@ -15,7 +15,7 @@ const Header = ({ dark, setDark }) => {
   const classes = useStyles();
 
   return (
-    <AppBar>
+    <AppBar color="secondary">
       <Toolbar>
         <MuiLink
           to="/"

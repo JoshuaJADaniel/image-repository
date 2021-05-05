@@ -14,7 +14,7 @@ const ActionPost = () => {
   return (
     <Tooltip title="Upload Image(s)" placement="left">
       <Fab
-        color="primary"
+        color="secondary"
         aria-label="upload"
         onClick={handleUpload}
         className={classes.fab}
