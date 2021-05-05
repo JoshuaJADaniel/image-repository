@@ -5,7 +5,7 @@ import { render } from "@testing-library/react";
 it("Renders the correct content", () => {
   const { getByLabelText } = render(
     <Router>
-      <DefaultTemplate>
+      <DefaultTemplate title="test">
         <div />
       </DefaultTemplate>
     </Router>
@@ -17,7 +17,7 @@ it("Renders the correct content", () => {
 it("Accepts children nodes", () => {
   const { getByLabelText, getByText } = render(
     <Router>
-      <DefaultTemplate>
+      <DefaultTemplate title="test">
         <div>Test</div>
       </DefaultTemplate>
     </Router>
