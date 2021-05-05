@@ -5,7 +5,7 @@ const styles = makeStyles((theme) => ({
     position: "fixed",
     right: theme.spacing(2),
     bottom: theme.spacing(2),
-    zIndex: theme.zIndex.tooltip,
+    zIndex: theme.zIndex.speedDial,
   },
 }));
 
