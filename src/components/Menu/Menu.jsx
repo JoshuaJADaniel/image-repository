@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
+import HomeIcon from "@material-ui/icons/Home";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
@@ -26,12 +27,20 @@ const Menu = ({ dark, setDark, classes }) => {
 
   return (
     <div className={classes.wrapper}>
-      <ActionButton
-        icon={<NotificationsIcon />}
-        tooltip="Toggle Notifications"
-        onClick={handleNotifications}
+      <ActionLink
+        link="/"
+        icon={<HomeIcon />}
+        tooltip="Homepage"
         className={classes.iconButton}
       />
+      <Box display={{ xs: "none", sm: "block" }}>
+        <ActionButton
+          icon={<NotificationsIcon />}
+          tooltip="Toggle Notifications"
+          onClick={handleNotifications}
+          className={classes.iconButton}
+        />
+      </Box>
       <Box display={{ xs: "none", md: "block" }}>
         <ActionLink
           external
