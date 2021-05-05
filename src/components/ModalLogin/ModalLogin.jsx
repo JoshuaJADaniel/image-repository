@@ -19,7 +19,7 @@ const ModalLogin = ({ open, onClose }) => {
   return (
     <ModalForm onClose={onClose} open={open}>
       <Box py={4}>
-        <ButtonGoogle />
+        <ButtonGoogle text="Login with Google" />
       </Box>
       <LineText text="OR" />
       <Box pb={3}>
