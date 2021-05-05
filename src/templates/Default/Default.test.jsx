@@ -11,7 +11,7 @@ it("Renders the correct content", () => {
     </Router>
   );
 
-  getByLabelText("post");
+  getByLabelText("upload");
 });
 
 it("Accepts children nodes", () => {
@@ -23,6 +23,6 @@ it("Accepts children nodes", () => {
     </Router>
   );
 
-  getByLabelText("post");
+  getByLabelText("upload");
   getByText("Test");
 });
