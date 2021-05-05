@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
@@ -11,16 +12,23 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import ActionLink from "components/ActionLink";
 import ActionButton from "components/ActionButton";
+import ModalSignup from "components/ModalSignup";
+import ModalLogin from "components/ModalLogin";
 
 import { toggleTheme } from "styles/themeStorage";
 import useStyles from "./Menu.styles";
 
 const Menu = ({ dark, setDark }) => {
   const classes = useStyles();
+  const [loginVisible, setLoginVisible] = useState(false);
+  const [signupVisible, setSignupVisible] = useState(false);
 
-  const handleNotifications = () => {
-    console.log("Notifications");
-  };
+  const openLoginModal = () => setLoginVisible(true);
+  const closeLoginModal = () => setLoginVisible(false);
+  const openSignupModal = () => setSignupVisible(true);
+  const closeSignupModal = () => setSignupVisible(false);
+
+  const handleNotifications = () => console.log("Notifications");
 
   const handleTheme = () => {
     setDark(!dark);
@@ -60,14 +68,20 @@ const Menu = ({ dark, setDark }) => {
           icon={dark ? <BrightnessIcon /> : <DarknessIcon />}
         />
       </Box>
-      <Button color="inherit" className={classes.loginButton}>
+      <Button
+        color="inherit"
+        onClick={openLoginModal}
+        className={classes.loginButton}
+      >
         Login
       </Button>
       <Box display={{ xs: "none", sm: "block" }}>
-        <Button color="inherit" variant="outlined">
+        <Button color="inherit" variant="outlined" onClick={openSignupModal}>
           Signup
         </Button>
       </Box>
+      <ModalLogin open={loginVisible} onClose={closeLoginModal} />
+      <ModalSignup open={signupVisible} onClose={closeSignupModal} />
     </div>
   );
 };

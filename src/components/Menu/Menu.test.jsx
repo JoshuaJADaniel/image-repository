@@ -3,10 +3,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { render, fireEvent } from "@testing-library/react";
 
 test("Renders the correct content", () => {
-  const setDark = jest.fn();
   const { getByTitle, getByText } = render(
     <Router>
-      <Menu dark setDark={setDark} />
+      <Menu dark setDark={() => {}} />
     </Router>
   );
 
@@ -19,15 +18,22 @@ test("Renders the correct content", () => {
 });
 
 test("Allows button clicks", () => {
-  const setDark = jest.fn();
-  const { getByTitle } = render(
+  const { getByTitle, getAllByTitle, getByText } = render(
     <Router>
-      <Menu dark setDark={setDark} />
+      <Menu dark setDark={() => {}} />
     </Router>
   );
 
+  const closeModals = () => {
+    getAllByTitle("Close").forEach((close) => fireEvent.click(close));
+  };
+
   fireEvent.click(getByTitle("Toggle Theme"));
   fireEvent.click(getByTitle("Toggle Notifications"));
+  fireEvent.click(getByText("Signup"));
+  closeModals();
+  fireEvent.click(getByText("Login"));
+  closeModals();
 });
 
 test("Changes theme correctly", () => {
