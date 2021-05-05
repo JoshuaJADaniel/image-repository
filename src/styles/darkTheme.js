@@ -5,6 +5,9 @@ const darkTheme = {
     type: "dark",
     border: grey[800],
     primary: {
+      main: "#ffffff",
+    },
+    secondary: {
       main: "#333333",
     },
     background: {
