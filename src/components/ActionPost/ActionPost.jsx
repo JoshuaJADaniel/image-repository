@@ -1,37 +1,28 @@
-import PropTypes from "prop-types";
-
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import { withStyles } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
 
-const ActionPost = ({ classes }) => {
-  const handlePost = () => {
-    console.log("Post");
+import useStyles from "./ActionPost.styles";
+
+const ActionPost = () => {
+  const classes = useStyles();
+
+  const handleUpload = () => {
+    console.log("Upload");
   };
 
   return (
-    <Fab
-      color="primary"
-      aria-label="post"
-      onClick={handlePost}
-      className={classes.fab}
-    >
-      <AddIcon />
-    </Fab>
+    <Tooltip title="Upload Image(s)" placement="left">
+      <Fab
+        color="primary"
+        aria-label="upload"
+        onClick={handleUpload}
+        className={classes.fab}
+      >
+        <AddIcon />
+      </Fab>
+    </Tooltip>
   );
 };
 
-ActionPost.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-const styles = (theme) => ({
-  fab: {
-    position: "fixed",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-    zIndex: theme.zIndex.tooltip,
-  },
-});
-
-export default withStyles(styles)(ActionPost);
+export default ActionPost;
