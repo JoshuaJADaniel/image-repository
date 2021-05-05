@@ -5,20 +5,23 @@ import Button from "@material-ui/core/Button";
 
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import ActionLink from "components/ActionLink";
 import ActionButton from "components/ActionButton";
 
 import { withStyles } from "@material-ui/core/styles";
+import { toggleTheme } from "styles/themeStorage";
 
-const Menu = ({ classes }) => {
+const Menu = ({ dark, setDark, classes }) => {
   const handleNotifications = () => {
     console.log("Notifications");
   };
 
   const handleTheme = () => {
-    console.log("Theme");
+    setDark(!dark);
+    toggleTheme();
   };
 
   return (
@@ -40,10 +43,10 @@ const Menu = ({ classes }) => {
       </Box>
       <Box display={{ xs: "none", sm: "block" }}>
         <ActionButton
-          icon={<Brightness4Icon />}
           tooltip="Toggle Theme"
           onClick={handleTheme}
           className={classes.iconButton}
+          icon={dark ? <Brightness7Icon /> : <Brightness4Icon />}
         />
       </Box>
       <Button color="inherit" className={classes.loginButton}>
@@ -59,6 +62,8 @@ const Menu = ({ classes }) => {
 };
 
 Menu.propTypes = {
+  dark: PropTypes.bool.isRequired,
+  setDark: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
