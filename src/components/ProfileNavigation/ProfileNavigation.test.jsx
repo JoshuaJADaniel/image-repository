@@ -22,3 +22,14 @@ test("Buttons are clickable", () => {
   fireEvent.click(getByLabelText("upload image(s)"));
   fireEvent.click(getByLabelText("delete selected"));
 });
+
+test("Button deletion colors are affected", () => {
+  const itemsToDelete = new Set(["test"]);
+  render(
+    <ProfileNavigation
+      page=""
+      setPage={() => {}}
+      itemsToDelete={itemsToDelete}
+    />
+  );
+});

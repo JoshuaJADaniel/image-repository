@@ -8,6 +8,9 @@ const styles = makeStyles((theme) => ({
     fontSize: "0.875rem",
     marginTop: theme.spacing(2),
   },
+  deletionEnabled: {
+    color: theme.palette.error.main,
+  },
 }));
 
 export default styles;

@@ -67,7 +67,10 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
               <DeleteIcon />
             </Badge>
           }
-          classes={{ label: classes.label }}
+          classes={{
+            label: classes.label,
+            root: itemsToDelete.size && classes.deletionEnabled,
+          }}
         />
       </BottomNavigation>
     </>
