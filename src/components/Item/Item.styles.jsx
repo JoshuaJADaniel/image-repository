@@ -49,15 +49,16 @@ const styles = makeStyles((theme) => ({
     position: "absolute",
     top: theme.spacing(1),
     right: theme.spacing(1.5),
-    "& button, & a": {
+    "& > button, & > a": {
       opacity: 0,
+    },
+    "& > *": {
+      padding: theme.spacing(0.75),
       margin: theme.spacing(1, 0.5),
       color: theme.palette.getContrastText(theme.palette.background.default),
-      backgroundColor: fade(theme.palette.background.paper, 0.7),
+      backgroundColor: fade(theme.palette.background.paper, 0.8),
+      "&:hover": { backgroundColor: fade(theme.palette.background.paper, 0.8) },
       transition: theme.transitions.create(["opacity", "background-color"]),
-      "&:hover": {
-        backgroundColor: fade(theme.palette.background.paper, 0.9),
-      },
     },
   },
   chipGroup: {
