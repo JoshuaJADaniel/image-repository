@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+import Badge from "@material-ui/core/Badge";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
@@ -10,7 +11,7 @@ import PrivateIcon from "@material-ui/icons/VisibilityOff";
 
 import useStyles from "./ProfileNavigation.styles";
 
-const ProfileNavigation = ({ page, setPage, deleteImages }) => {
+const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
   const classes = useStyles();
 
   const handlePage = (e, page) => {
@@ -19,9 +20,11 @@ const ProfileNavigation = ({ page, setPage, deleteImages }) => {
         console.log("Upload image(s)");
         break;
       case "delete":
-        deleteImages();
+        console.log("Items to delete");
+        console.log(itemsToDelete);
         break;
       default:
+        itemsToDelete.clear();
         setPage(page);
     }
   };
@@ -59,7 +62,11 @@ const ProfileNavigation = ({ page, setPage, deleteImages }) => {
           value="delete"
           label="Delete Selected"
           aria-label="delete selected"
-          icon={<DeleteIcon />}
+          icon={
+            <Badge badgeContent={itemsToDelete.size} color="error">
+              <DeleteIcon />
+            </Badge>
+          }
           classes={{ label: classes.label }}
         />
       </BottomNavigation>
@@ -70,7 +77,7 @@ const ProfileNavigation = ({ page, setPage, deleteImages }) => {
 ProfileNavigation.propTypes = {
   page: PropTypes.string.isRequired,
   setPage: PropTypes.func.isRequired,
-  deleteImages: PropTypes.func.isRequired,
+  itemsToDelete: PropTypes.object.isRequired,
 };
 
 export default ProfileNavigation;

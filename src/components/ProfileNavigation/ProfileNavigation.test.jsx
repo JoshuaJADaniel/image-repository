@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react";
 
 test("Renders the correct content", () => {
   const { getByLabelText } = render(
-    <ProfileNavigation page="" setPage={() => {}} deleteImages={() => {}} />
+    <ProfileNavigation page="" setPage={() => {}} itemsToDelete={new Set()} />
   );
 
   getByLabelText("public uploads");
@@ -14,21 +14,11 @@ test("Renders the correct content", () => {
 
 test("Buttons are clickable", () => {
   const { getByLabelText } = render(
-    <ProfileNavigation page="" setPage={() => {}} deleteImages={() => {}} />
+    <ProfileNavigation page="" setPage={() => {}} itemsToDelete={new Set()} />
   );
 
   fireEvent.click(getByLabelText("public uploads"));
   fireEvent.click(getByLabelText("private uploads"));
   fireEvent.click(getByLabelText("upload image(s)"));
   fireEvent.click(getByLabelText("delete selected"));
-});
-
-test("Delete calls callback", () => {
-  const deleteImages = jest.fn();
-  const { getByLabelText } = render(
-    <ProfileNavigation page="" setPage={() => {}} deleteImages={deleteImages} />
-  );
-
-  fireEvent.click(getByLabelText("delete selected"));
-  expect(deleteImages).toHaveBeenCalledTimes(1);
 });
