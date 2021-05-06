@@ -55,10 +55,10 @@ const styles = makeStyles((theme) => ({
     "& > *": {
       padding: theme.spacing(0.75),
       margin: theme.spacing(1, 0.5),
-      color: theme.palette.getContrastText(theme.palette.background.default),
       backgroundColor: fade(theme.palette.background.paper, 0.8),
       "&:hover": { backgroundColor: fade(theme.palette.background.paper, 0.8) },
-      transition: theme.transitions.create(["opacity", "background-color"]),
+      color: theme.palette.getContrastText(theme.palette.background.default),
+      transition: theme.transitions.create(["opacity"]),
     },
   },
   chipGroup: {
