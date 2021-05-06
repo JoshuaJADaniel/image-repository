@@ -1,5 +1,5 @@
 import ProfileNavigation from "./ProfileNavigation";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, queryByLabelText } from "@testing-library/react";
 
 test("Renders the correct content", () => {
   const { getByLabelText } = render(
@@ -23,13 +23,26 @@ test("Buttons are clickable", () => {
   fireEvent.click(getByLabelText("delete selected"));
 });
 
-test("Button deletion colors are affected", () => {
+test("Button deletion works with items", () => {
   const itemsToDelete = new Set(["test"]);
-  render(
+  const { getByLabelText, queryByRole } = render(
     <ProfileNavigation
       page=""
       setPage={() => {}}
       itemsToDelete={itemsToDelete}
     />
   );
+
+  fireEvent.click(getByLabelText("delete selected"));
+  expect(queryByRole("alert")).toBeNull();
+});
+
+test("Button deletion notifies if empty", () => {
+  const { getByLabelText, getByRole } = render(
+    <ProfileNavigation page="" setPage={() => {}} itemsToDelete={new Set()} />
+  );
+
+  fireEvent.click(getByLabelText("delete selected"));
+  fireEvent.click(getByLabelText("Close"));
+  getByRole("alert");
 });

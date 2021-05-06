@@ -1,18 +1,27 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import Badge from "@material-ui/core/Badge";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-
-import AddIcon from "@material-ui/icons/Add";
-import PublicIcon from "@material-ui/icons/Public";
-import DeleteIcon from "@material-ui/icons/DeleteForever";
 import PrivateIcon from "@material-ui/icons/VisibilityOff";
+import DeleteIcon from "@material-ui/icons/DeleteForever";
+import PublicIcon from "@material-ui/icons/Public";
+import AddIcon from "@material-ui/icons/Add";
+
+import AlertUser from "components/AlertUser";
 
 import useStyles from "./ProfileNavigation.styles";
 
 const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
   const classes = useStyles();
+  const [notify, setNotify] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason !== "clickaway") {
+      setNotify(false);
+    }
+  };
 
   const handlePage = (e, page) => {
     switch (page) {
@@ -20,8 +29,12 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
         console.log("Upload image(s)");
         break;
       case "delete":
-        console.log("Items to delete");
-        console.log(itemsToDelete);
+        if (!itemsToDelete.size) {
+          setNotify(true);
+        } else {
+          console.log("Delete the following");
+          console.log(itemsToDelete);
+        }
         break;
       default:
         itemsToDelete.clear();
@@ -73,6 +86,11 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
           }}
         />
       </BottomNavigation>
+      <AlertUser
+        open={notify}
+        handleClose={handleClose}
+        text="Select at least one image to delete!"
+      />
     </>
   );
 };
