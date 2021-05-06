@@ -29,7 +29,9 @@ const DefaultTemplate = ({ title, children }) => {
       <CssBaseline />
       <Header dark={dark} setDark={setDark} />
       <Toolbar />
-      <Box p={3}>{children}</Box>
+      <Box p={3} position="relative">
+        {children}
+      </Box>
       <ActionPost />
     </ThemeProvider>
   );
