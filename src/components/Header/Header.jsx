@@ -1,3 +1,4 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -11,7 +12,7 @@ import Search from "components/Search";
 
 import useStyles from "./Header.styles";
 
-const Header = ({ dark, setDark }) => {
+const Header = memo(({ dark, setDark }) => {
   const classes = useStyles();
 
   return (
@@ -36,7 +37,7 @@ const Header = ({ dark, setDark }) => {
       </Toolbar>
     </AppBar>
   );
-};
+});
 
 Header.propTypes = {
   dark: PropTypes.bool.isRequired,
