@@ -58,7 +58,11 @@ const styles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.background.paper, 0.8),
       "&:hover": { backgroundColor: fade(theme.palette.background.paper, 0.8) },
       color: theme.palette.getContrastText(theme.palette.background.default),
-      transition: theme.transitions.create(["opacity"]),
+      transition: theme.transitions.create([
+        "color",
+        "opacity",
+        "background-color",
+      ]),
     },
   },
   chipGroup: {
