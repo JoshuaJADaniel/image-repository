@@ -6,8 +6,8 @@ test("Renders the correct content", () => {
     <ProfileNavigation
       page=""
       setPage={() => {}}
-      itemsToDelete={[]}
-      setItemsToDelete={() => {}}
+      toDelete={[]}
+      setToDelete={() => {}}
     />
   );
 
@@ -22,8 +22,8 @@ test("Buttons are clickable", () => {
     <ProfileNavigation
       page=""
       setPage={() => {}}
-      itemsToDelete={[]}
-      setItemsToDelete={() => {}}
+      toDelete={[]}
+      setToDelete={() => {}}
     />
   );
 
@@ -34,13 +34,13 @@ test("Buttons are clickable", () => {
 });
 
 test("Button deletion works with items", () => {
-  const itemsToDelete = ["test"];
+  const toDelete = ["test"];
   const { getByLabelText, queryByRole } = render(
     <ProfileNavigation
       page=""
       setPage={() => {}}
-      itemsToDelete={itemsToDelete}
-      setItemsToDelete={() => {}}
+      toDelete={toDelete}
+      setToDelete={() => {}}
     />
   );
 
@@ -53,8 +53,8 @@ test("Button deletion notifies if empty", () => {
     <ProfileNavigation
       page=""
       setPage={() => {}}
-      itemsToDelete={[]}
-      setItemsToDelete={() => {}}
+      toDelete={[]}
+      setToDelete={() => {}}
     />
   );
 
