@@ -1,8 +1,9 @@
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { JustifiedLayout } from "@egjs/react-infinitegrid";
 import { Loader, appendItems, mapItems, layoutComplete } from "utils/feed";
 
-const Feed = ({ items, getItems, setItems }) => (
+const Feed = memo(({ items, getItems, setItems }) => (
   <JustifiedLayout
     loading={Loader}
     data-testid="feed"
@@ -24,7 +25,7 @@ const Feed = ({ items, getItems, setItems }) => (
   >
     {mapItems(items)}
   </JustifiedLayout>
-);
+));
 
 Feed.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
