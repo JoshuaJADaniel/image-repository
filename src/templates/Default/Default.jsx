@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 
 import Box from "@material-ui/core/Box";
@@ -17,15 +17,17 @@ import { getLocalTheme } from "styles/themeStorage";
 const DefaultTemplate = ({ title, children }) => {
   const [dark, setDark] = useState(getLocalTheme());
 
-  const createTheme = () =>
-    dark ? createMuiTheme(darkTheme) : createMuiTheme(lightTheme);
+  const theme = useMemo(
+    () => (dark ? createMuiTheme(darkTheme) : createMuiTheme(lightTheme)),
+    [dark]
+  );
 
   useEffect(() => {
     document.title = title;
   }, [title]);
 
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header dark={dark} setDark={setDark} />
       <Toolbar />
