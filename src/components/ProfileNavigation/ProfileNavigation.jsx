@@ -13,7 +13,12 @@ import AlertUser from "components/AlertUser";
 
 import useStyles from "./ProfileNavigation.styles";
 
-const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
+const ProfileNavigation = ({
+  page,
+  setPage,
+  itemsToDelete,
+  setItemsToDelete,
+}) => {
   const classes = useStyles();
   const [notify, setNotify] = useState(false);
 
@@ -29,7 +34,7 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
         console.log("Upload image(s)");
         break;
       case "delete":
-        if (!itemsToDelete.size) {
+        if (!itemsToDelete.length) {
           setNotify(true);
         } else {
           console.log("Delete the following");
@@ -37,7 +42,7 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
         }
         break;
       default:
-        itemsToDelete.clear();
+        setItemsToDelete([]);
         setPage(page);
     }
   };
@@ -76,13 +81,13 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
           label="Delete Selected"
           aria-label="delete selected"
           icon={
-            <Badge badgeContent={itemsToDelete.size} color="error">
+            <Badge badgeContent={itemsToDelete.length} color="error">
               <DeleteIcon />
             </Badge>
           }
           classes={{
             label: classes.label,
-            root: itemsToDelete.size && classes.deletionEnabled,
+            root: itemsToDelete.length && classes.deletionEnabled,
           }}
         />
       </BottomNavigation>
@@ -98,7 +103,8 @@ const ProfileNavigation = ({ page, setPage, itemsToDelete }) => {
 ProfileNavigation.propTypes = {
   page: PropTypes.string.isRequired,
   setPage: PropTypes.func.isRequired,
-  itemsToDelete: PropTypes.object.isRequired,
+  itemsToDelete: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setItemsToDelete: PropTypes.func.isRequired,
 };
 
 export default ProfileNavigation;

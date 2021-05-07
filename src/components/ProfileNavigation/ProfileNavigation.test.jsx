@@ -1,9 +1,14 @@
 import ProfileNavigation from "./ProfileNavigation";
-import { render, fireEvent, queryByLabelText } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 
 test("Renders the correct content", () => {
   const { getByLabelText } = render(
-    <ProfileNavigation page="" setPage={() => {}} itemsToDelete={new Set()} />
+    <ProfileNavigation
+      page=""
+      setPage={() => {}}
+      itemsToDelete={[]}
+      setItemsToDelete={() => {}}
+    />
   );
 
   getByLabelText("public uploads");
@@ -14,7 +19,12 @@ test("Renders the correct content", () => {
 
 test("Buttons are clickable", () => {
   const { getByLabelText } = render(
-    <ProfileNavigation page="" setPage={() => {}} itemsToDelete={new Set()} />
+    <ProfileNavigation
+      page=""
+      setPage={() => {}}
+      itemsToDelete={[]}
+      setItemsToDelete={() => {}}
+    />
   );
 
   fireEvent.click(getByLabelText("public uploads"));
@@ -24,12 +34,13 @@ test("Buttons are clickable", () => {
 });
 
 test("Button deletion works with items", () => {
-  const itemsToDelete = new Set(["test"]);
+  const itemsToDelete = ["test"];
   const { getByLabelText, queryByRole } = render(
     <ProfileNavigation
       page=""
       setPage={() => {}}
       itemsToDelete={itemsToDelete}
+      setItemsToDelete={() => {}}
     />
   );
 
@@ -39,7 +50,12 @@ test("Button deletion works with items", () => {
 
 test("Button deletion notifies if empty", () => {
   const { getByLabelText, getByRole } = render(
-    <ProfileNavigation page="" setPage={() => {}} itemsToDelete={new Set()} />
+    <ProfileNavigation
+      page=""
+      setPage={() => {}}
+      itemsToDelete={[]}
+      setItemsToDelete={() => {}}
+    />
   );
 
   fireEvent.click(getByLabelText("delete selected"));
