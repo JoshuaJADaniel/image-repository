@@ -1,12 +1,12 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import PropTypes from "prop-types";
 import Item from "components/Item";
 import Box from "@material-ui/core/Box";
 import { JustifiedLayout } from "@egjs/react-infinitegrid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const appendItems = (e, items, getItems, setItems) => {
-  if (e.currentTarget.isProcessing()) {
+const appendItems = (e, items, getItems, setItems, shouldLoad) => {
+  if (e.currentTarget.isProcessing() || !shouldLoad) {
     return;
   }
 
@@ -16,6 +16,7 @@ const appendItems = (e, items, getItems, setItems) => {
   e.startLoading();
   const newItems = getItems(nextGroupKey, nextKey);
   setItems([...items, ...newItems]);
+  return newItems.length !== 0;
 };
 
 const layoutComplete = (e) => {
@@ -37,29 +38,34 @@ const Loader = (
   </Box>
 );
 
-const Feed = memo(({ items, getItems, setItems }) => (
-  <JustifiedLayout
-    loading={Loader}
-    data-testid="feed"
-    useFirstRender={false}
-    options={{ useRecycle: false }}
-    groupBy={(item) => item.props["data-groupkey"]}
-    layoutOptions={{
-      margin: 20,
-      column: (() => {
-        if (typeof window !== "undefined") {
-          return Math.ceil(window.innerWidth / 400);
-        } else {
-          return 1;
-        }
-      })(),
-    }}
-    onAppend={(e) => appendItems(e, items, getItems, setItems)}
-    onLayoutComplete={(e) => layoutComplete(e)}
-  >
-    {mapItems(items)}
-  </JustifiedLayout>
-));
+const Feed = memo(({ items, getItems, setItems }) => {
+  const [shouldLoad, setShouldLoad] = useState(true);
+
+  const handleAppend = (e) => {
+    const newState = appendItems(e, items, getItems, setItems, shouldLoad);
+    if (typeof newState === "boolean") {
+      setShouldLoad(newState);
+    }
+  };
+
+  return (
+    <JustifiedLayout
+      loading={Loader}
+      data-testid="feed"
+      useFirstRender={false}
+      options={{ useRecycle: false }}
+      groupBy={(item) => item.props["data-groupkey"]}
+      layoutOptions={{
+        margin: 20,
+        column: Math.ceil(window.innerWidth / 400),
+      }}
+      onAppend={handleAppend}
+      onLayoutComplete={layoutComplete}
+    >
+      {mapItems(items)}
+    </JustifiedLayout>
+  );
+});
 
 Feed.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
