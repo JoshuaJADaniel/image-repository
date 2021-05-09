@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+import { getGoogleUrl } from "utils/user";
 import Button from "@material-ui/core/Button";
 import { ReactComponent as GoogleIcon } from "images/google.svg";
 import useStyles from "./ButtonGoogle.styles";
@@ -10,10 +11,10 @@ const ButtonGoogle = ({ text }) => {
   return (
     <Button
       fullWidth
-      href="#"
       size="large"
       component="a"
       variant="contained"
+      href={getGoogleUrl()}
       startIcon={<GoogleIcon />}
       className={classes.googleButton}
     >
