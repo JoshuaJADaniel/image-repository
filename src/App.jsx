@@ -4,7 +4,7 @@ import Home from "pages/Home";
 import Profile from "pages/Profile";
 
 const App = () => (
-  <Router>
+  <Router basename="/image-repository/build">
     <Switch>
       <Route exact path="/">
         <Home />
