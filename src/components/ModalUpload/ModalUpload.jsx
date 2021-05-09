@@ -5,8 +5,11 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import UploadIcon from "@material-ui/icons/Publish";
+
 import CloseIcon from "@material-ui/icons/Close";
+import UploadIcon from "@material-ui/icons/Publish";
+import PublicIcon from "@material-ui/icons/Public";
+import PrivateIcon from "@material-ui/icons/VisibilityOff";
 
 import ModalForm from "components/ModalForm";
 import AlertUser from "components/AlertUser";
@@ -38,7 +41,7 @@ const ModalUpload = ({ open, onClose }) => {
   const onFileChange = (e) => setImage(e.target.files[0]);
   const handleImageTitle = (e) => setImageTitle(e.target.value);
 
-  const publishImage = () => {
+  const publishImage = (access) => {
     uploadImage(
       (res) => {
         if (res["error"]) {
@@ -52,9 +55,12 @@ const ModalUpload = ({ open, onClose }) => {
       },
       image,
       imageTitle,
-      "public"
+      access
     );
   };
+
+  const privatePublic = () => publishImage("private");
+  const publicPublish = () => publishImage("public");
 
   useEffect(() => {
     if (open) {
@@ -88,7 +94,7 @@ const ModalUpload = ({ open, onClose }) => {
               />
             </Typography>
             <img
-              className={classes.cropper}
+              className={classes.image}
               alt={image ? image.name : null}
               src={image ? URL.createObjectURL(image) : null}
             />
@@ -107,16 +113,28 @@ const ModalUpload = ({ open, onClose }) => {
               <Button
                 variant="contained"
                 onClick={handleClose}
-                classes={{ root: classes.errorButtonRoot }}
+                classes={{ root: classes.cancelRoot }}
+                className={classes.button}
               >
                 Cancel
               </Button>
               <Button
                 color="primary"
                 variant="contained"
-                onClick={publishImage}
+                onClick={publicPublish}
+                startIcon={<PublicIcon />}
+                className={classes.button}
               >
-                Publish
+                Publish Public
+              </Button>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={privatePublic}
+                startIcon={<PrivateIcon />}
+                className={classes.button}
+              >
+                Public Private
               </Button>
             </Box>
             {error && (
