@@ -5,18 +5,27 @@ import Box from "@material-ui/core/Box";
 import { JustifiedLayout } from "@egjs/react-infinitegrid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const appendItems = (e, items, getItems, setItems, shouldLoad) => {
-  if (e.currentTarget.isProcessing() || !shouldLoad) {
+const appendItems = (e, items, getItems, setItems, setShouldLoad) => {
+  if (e.currentTarget.isProcessing()) {
     return;
   }
 
   const nextGroupKey = (+e.groupKey || 0) + 1;
   const nextKey = items.length;
 
-  e.startLoading();
-  const newItems = getItems(nextGroupKey, nextKey);
-  setItems([...items, ...newItems]);
-  return newItems.length !== 0;
+  getItems(
+    (newItems) => {
+      setItems([...items, ...newItems]);
+      if (newItems.length !== 0) {
+        e.startLoading();
+        setShouldLoad(true);
+      } else {
+        setShouldLoad(false);
+      }
+    },
+    nextGroupKey,
+    nextKey
+  );
 };
 
 const layoutComplete = (e) => {
@@ -42,9 +51,8 @@ const Feed = memo(({ items, getItems, setItems }) => {
   const [shouldLoad, setShouldLoad] = useState(true);
 
   const handleAppend = (e) => {
-    const newState = appendItems(e, items, getItems, setItems, shouldLoad);
-    if (typeof newState === "boolean") {
-      setShouldLoad(newState);
+    if (shouldLoad) {
+      appendItems(e, items, getItems, setItems, setShouldLoad);
     }
   };
 
