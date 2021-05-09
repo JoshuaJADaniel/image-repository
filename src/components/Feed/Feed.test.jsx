@@ -1,6 +1,5 @@
 import Feed from "./Feed";
 import { render, fireEvent } from "@testing-library/react";
-import { layoutComplete } from "utils/feed";
 
 let key = 0;
 let items = [];
@@ -37,14 +36,4 @@ test("Executes layout rendering methods", () => {
 
   const feedElement = getByTestId("feed");
   fireEvent.scroll(feedElement, { target: { scrollY: 1000 } });
-});
-
-test("Feed util ends loading", () => {
-  const event = {
-    isLayout: false,
-    endLoading: jest.fn(),
-  };
-
-  layoutComplete(event);
-  expect(event.endLoading).toHaveBeenCalledTimes(1);
 });
