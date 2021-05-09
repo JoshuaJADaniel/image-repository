@@ -10,12 +10,14 @@ import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
 
 import AlertUser from "components/AlertUser";
+import ModalUpload from "components/ModalUpload";
 
 import useStyles from "./ProfileNavigation.styles";
 
 const ProfileNavigation = ({ page, setPage, toDelete, setToDelete }) => {
   const classes = useStyles();
   const [notify, setNotify] = useState(false);
+  const [openUpload, setOpenUpload] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason !== "clickaway") {
@@ -23,10 +25,12 @@ const ProfileNavigation = ({ page, setPage, toDelete, setToDelete }) => {
     }
   };
 
+  const closeOpenUpload = () => setOpenUpload(false);
+
   const handlePage = (e, page) => {
     switch (page) {
       case "upload":
-        console.log("Upload image(s)");
+        setOpenUpload(true);
         break;
       case "delete":
         if (!toDelete.length) {
@@ -44,6 +48,7 @@ const ProfileNavigation = ({ page, setPage, toDelete, setToDelete }) => {
 
   return (
     <>
+      <ModalUpload open={openUpload} onClose={closeOpenUpload} />
       <BottomNavigation
         showLabels
         value={page}
@@ -66,8 +71,8 @@ const ProfileNavigation = ({ page, setPage, toDelete, setToDelete }) => {
         />
         <BottomNavigationAction
           value="upload"
-          label="Upload Image(s)"
-          aria-label="upload image(s)"
+          label="Upload Image"
+          aria-label="upload image"
           icon={<AddIcon />}
           classes={{ label: classes.label }}
         />
