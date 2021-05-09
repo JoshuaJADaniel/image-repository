@@ -2,3 +2,9 @@ body {
   margin: 0;
   overflow-y: scroll;
 }
+
+span.deleteChecked,
+span.deleteChecked:hover {
+  color: white !important;
+  background-color: #f44336 !important;
+}
