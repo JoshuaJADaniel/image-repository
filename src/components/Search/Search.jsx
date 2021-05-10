@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,11 +8,17 @@ import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "./Search.styles";
 
 const Search = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [query, setQuery] = useState("");
 
   const handleSearch = () => {
-    console.log(`Search for: ${query}`);
+    if (query !== "") {
+      history.push({
+        pathname: "/search",
+        search: `?q=${query}`,
+      });
+    }
   };
 
   const handleQuery = (e) => {
