@@ -33,12 +33,44 @@
 
 
 
+## Table of Contents
+<ol>
+  <li>
+    <a href="#built-with">Built with</a>
+    <ul>
+      <li><a href="#testing-libraries">Testing libraries</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#how-to-use-the-application">How to use the application?</a>
+  </li>
+  <li>
+    <a href="#getting-started">Getting started</a>
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#installation">Installation</a></li>
+    </ul>
+  </li>
+  <li><a href="#testing">Testing</a></li>
+  <li>
+    <a href="#api-documentation">API documentation</a>
+    <ul>
+      <li><a href="#other-operations">Other operations</a></li>
+    </ul>
+  </li>
+  <li><a href="#license">License</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+</ol>
+
+
+
 ## Built with
 * [PHP](https://www.php.net) - backend responsible for user authentication, login / signup, searches, image upload / deletion, etc.
 * [MySQL](https://www.mysql.com) - storage solution for holding existing users and image upload information
 * [React / JS](https://reactjs.org) - frontend responsible for UI/UX interface to perform actions
 
-### Testing Libraries
+### Testing libraries
 * [Jest Testing Library](https://jestjs.io)
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 
@@ -111,7 +143,7 @@ npm run test -- --coverage --watchAll=false
 
 
 
-## API Docs
+## API documentation
 ```GET``` ```/api/feed/recent.php``` returns all public uploads ordered by time
 
 ```GET``` ```/api/feed/search.php``` returns all public uploads with exact search query in the title
