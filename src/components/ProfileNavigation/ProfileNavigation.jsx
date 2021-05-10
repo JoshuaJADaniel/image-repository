@@ -11,6 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import AlertUser from "components/AlertUser";
 import ModalUpload from "components/ModalUpload";
+import { deleteItem } from "utils/feed";
 
 import useStyles from "./ProfileNavigation.styles";
 
@@ -35,10 +36,14 @@ const ProfileNavigation = ({ page, setPage, toDelete, setToDelete }) => {
       case "delete":
         if (!toDelete.length) {
           setNotify(true);
-        } else {
-          console.log("Delete the following");
-          console.log(toDelete);
+          return;
         }
+
+        toDelete.forEach((url) => {
+          deleteItem(url);
+        });
+
+        window.location.reload();
         break;
       default:
         setToDelete([]);

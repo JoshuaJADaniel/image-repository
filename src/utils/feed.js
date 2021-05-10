@@ -10,6 +10,7 @@ const FEED_BACKEND = "https://joshuajadaniel.com/image-repository/api/feed";
 const UPLOAD_ENDPOINT = `${FEED_BACKEND}/upload.php`;
 const PUBLIC_ENDPOINT = `${FEED_BACKEND}/recent.php`;
 const SEARCH_ENDPOINT = `${FEED_BACKEND}/search.php`;
+const DELETE_ENDPOINT = `${FEED_BACKEND}/delete.php`;
 const USER_UPLOADS_ENDPOINT = `${FEED_BACKEND}/user.php`;
 
 const uploadImage = (callback, image, title, access) => {
@@ -156,6 +157,13 @@ const getSearchItems = (callback, search) => {
   });
 };
 
+const deleteItem = (url) => {
+  const form = new FormData();
+  form.append("url", url);
+  form.append("jwt", localStorage.getItem("jwt") || "");
+  axios.post(DELETE_ENDPOINT, form).then(() => {});
+};
+
 const bytesToSize = (bytes) => {
   if (bytes < 1000) {
     return `${bytes}b`;
@@ -166,4 +174,10 @@ const bytesToSize = (bytes) => {
   return `${Math.round((bytes / 1000000) * 100) / 100}mb`;
 };
 
-export { uploadImage, getPublicItems, getUserUploads, getSearchItems };
+export {
+  uploadImage,
+  getPublicItems,
+  getUserUploads,
+  getSearchItems,
+  deleteItem,
+};
