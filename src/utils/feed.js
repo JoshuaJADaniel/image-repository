@@ -26,8 +26,8 @@ const uploadImage = (callback, image, title, access) => {
     });
 };
 
-const getPublicItems = (callback, nextGroupKey, nextKey) => {
-  axios.get(`${PUBLIC_ENDPOINT}?page=${nextGroupKey}`).then(({ data }) => {
+const getPublicItems = (callback) => {
+  axios.get(`${PUBLIC_ENDPOINT}`).then(({ data }) => {
     if (!data || !data.length) {
       callback([]);
       return;
@@ -35,15 +35,13 @@ const getPublicItems = (callback, nextGroupKey, nextKey) => {
 
     const nextItems = [];
     for (let i = 0; i < data.length; i++) {
-      const key = nextKey + i;
       const { url, title, bytes, dimensions } = data[i];
       const imageSize = bytesToSize(bytes);
 
       nextItems.push({
-        key: `public-${key}`,
+        key: `public-image-${i}`,
         size: imageSize,
         dimensions: dimensions,
-        groupKey: nextGroupKey,
         title: title,
         url: url,
         buttons: [
@@ -52,7 +50,7 @@ const getPublicItems = (callback, nextGroupKey, nextKey) => {
             size="small"
             tooltip="Open Full Size"
             icon={<OpenInNewIcon />}
-            key={`home-feed-full-size-${key}`}
+            key={`home-feed-full-size-${i}`}
             link={url}
           />,
         ],
@@ -63,16 +61,10 @@ const getPublicItems = (callback, nextGroupKey, nextKey) => {
   });
 };
 
-const getUserUploads = (
-  callback,
-  nextGroupKey,
-  nextKey,
-  setToDelete,
-  access
-) => {
+const getUserUploads = (callback, setToDelete, access) => {
   axios
     .get(
-      `${USER_UPLOADS_ENDPOINT}?page=${nextGroupKey}&jwt=${localStorage.getItem(
+      `${USER_UPLOADS_ENDPOINT}?jwt=${localStorage.getItem(
         "jwt"
       )}&access=${access}`
     )
@@ -84,15 +76,13 @@ const getUserUploads = (
 
       const nextItems = [];
       for (let i = 0; i < data.length; i++) {
-        const key = nextKey + i;
         const { url, title, bytes, dimensions } = data[i];
         const imageSize = bytesToSize(bytes);
 
         nextItems.push({
-          key: `public-${key}`,
+          key: `profile-feed-image-${access}-${i}`,
           size: imageSize,
           dimensions: dimensions,
-          groupKey: nextGroupKey,
           title: title,
           url: url,
           buttons: [
@@ -101,11 +91,11 @@ const getUserUploads = (
               link={url}
               tooltip="Open Full Size"
               icon={<OpenInNewIcon />}
-              key={`profile-feed-${access}-full-size-${key}`}
+              key={`profile-feed-${access}-full-size-${i}`}
             />,
             <Tooltip
               title="Toggle Delete"
-              key={`profile-feed-${access}-delete-${key}`}
+              key={`profile-feed-${access}-delete-${i}`}
             >
               <Checkbox
                 icon={<DeleteIcon />}
