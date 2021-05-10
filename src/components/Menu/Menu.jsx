@@ -73,7 +73,7 @@ const Menu = ({ dark, setDark }) => {
           external
           icon={<GitHubIcon />}
           tooltip="GitHub Repository"
-          link="https://github.com/joshuajadaniel"
+          link="https://github.com/joshuajadaniel/image-repository"
           className={classes.iconButton}
         />
       </Box>
