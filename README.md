@@ -1,6 +1,5 @@
 <div align="center">
   <br />
-  <br />
   <a href="https://joshuajadaniel.com/image-repository/build">
     <img src="https://joshuajadaniel.com/image-repository/showcase/logo.png" alt="Image Repository" width="auto" height="80">
   </a>
@@ -112,10 +111,40 @@ npm run test -- --coverage --watchAll=false
 
 
 
+## API Docs
+```GET``` ```/api/feed/recent.php``` returns all public uploads ordered by time
+
+```GET``` ```/api/feed/search.php``` returns all public uploads with exact search query in the title
+
+```GET``` ```/api/feed/user.php``` returns uploads for a user (provided you are authenticated)
+
+<br />
+
+```POST``` ```/api/feed/upload.php``` uploads an image (provided you are authenticated) to the repository
+
+```POST``` ```/api/feed/delete.php``` deletes an image (provided you are the owner) from the repository
+
+<br />
+
+```POST``` ```/api/user/login.php``` returns a JWT token if user has the correct credentials
+
+```POST``` ```/api/user/signup.php``` returns a JWT token if user does not exist
+
+```POST``` ```/api/user/validate.php``` returns whether a given JWT token is valid
+
+### Other operations
+```/api/google/auth.php``` redirects user to Google OAuth flow
+
+```/api/google/return.php``` return point after user is authenticated by Google (redirects back to frontend)
+
+
+
+
 ## Future features
 * Cropping prior to upload
 * Direct download for each image
 * Albums / collections for user organization
+* Tagging system for uploads
 * Edits to previous uploads
 
 
