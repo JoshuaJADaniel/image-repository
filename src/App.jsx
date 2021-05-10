@@ -1,6 +1,7 @@
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 import Home from "pages/Home";
+import Search from "pages/Search";
 import Profile from "pages/Profile";
 
 const App = () => (
@@ -11,6 +12,9 @@ const App = () => (
       </Route>
       <Route exact path="/profile">
         <Profile />
+      </Route>
+      <Route exact path="/search">
+        <Search />
       </Route>
     </Switch>
   </Router>
