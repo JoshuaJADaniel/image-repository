@@ -9,6 +9,7 @@ import DeleteIcon from "@material-ui/icons/DeleteForever";
 const FEED_BACKEND = "https://joshuajadaniel.com/image-repository/api/feed";
 const UPLOAD_ENDPOINT = `${FEED_BACKEND}/upload.php`;
 const PUBLIC_ENDPOINT = `${FEED_BACKEND}/recent.php`;
+const SEARCH_ENDPOINT = `${FEED_BACKEND}/search.php`;
 const USER_UPLOADS_ENDPOINT = `${FEED_BACKEND}/user.php`;
 
 const uploadImage = (callback, image, title, access) => {
@@ -120,6 +121,41 @@ const getUserUploads = (callback, setToDelete, access) => {
     });
 };
 
+const getSearchItems = (callback, search) => {
+  axios.get(`${SEARCH_ENDPOINT}?search=${search}`).then(({ data }) => {
+    if (!data || !data.length) {
+      callback([]);
+      return;
+    }
+
+    const nextItems = [];
+    for (let i = 0; i < data.length; i++) {
+      const { url, title, bytes, dimensions } = data[i];
+      const imageSize = bytesToSize(bytes);
+
+      nextItems.push({
+        key: `search-image-${i}`,
+        size: imageSize,
+        dimensions: dimensions,
+        title: title,
+        url: url,
+        buttons: [
+          <ActionLink
+            external
+            size="small"
+            tooltip="Open Full Size"
+            icon={<OpenInNewIcon />}
+            key={`search-feed-full-size-${i}`}
+            link={url}
+          />,
+        ],
+      });
+    }
+
+    callback(nextItems);
+  });
+};
+
 const bytesToSize = (bytes) => {
   if (bytes < 1000) {
     return `${bytes}b`;
@@ -130,4 +166,4 @@ const bytesToSize = (bytes) => {
   return `${Math.round((bytes / 1000000) * 100) / 100}mb`;
 };
 
-export { uploadImage, getPublicItems, getUserUploads };
+export { uploadImage, getPublicItems, getUserUploads, getSearchItems };
