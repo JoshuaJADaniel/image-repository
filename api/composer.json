@@ -1,0 +1,15 @@
+{
+  "name": "image-repository/api",
+  "description": "Image Repository",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Joshua J. A. Daniel",
+      "email": "joshuajadaniel@gmail.com"
+    }
+  ],
+  "require": {
+    "google/apiclient": "^2.7",
+    "firebase/php-jwt": "^5.2"
+  }
+}
