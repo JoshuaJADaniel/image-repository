@@ -1,4 +1,6 @@
 <div align="center">
+  <br />
+  <br />
   <a href="https://joshuajadaniel.com/image-repository/build">
     <img src="https://joshuajadaniel.com/image-repository/showcase/logo.png" alt="Image Repository" width="auto" height="80">
   </a>
