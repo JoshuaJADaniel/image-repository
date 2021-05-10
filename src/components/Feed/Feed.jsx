@@ -62,10 +62,11 @@ const Feed = memo(({ items, getItems, setItems }) => {
       data-testid="feed"
       useFirstRender={false}
       options={{ useRecycle: false }}
+      style={{ minHeight: "300px" }}
       groupBy={(item) => item.props["data-groupkey"]}
       layoutOptions={{
         margin: 20,
-        column: Math.ceil(window.innerWidth / 400),
+        column: Math.ceil(window.innerWidth / 500),
       }}
       onAppend={handleAppend}
       onLayoutComplete={layoutComplete}
