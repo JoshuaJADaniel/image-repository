@@ -58,6 +58,7 @@
       <li><a href="#other-operations">Other operations</a></li>
     </ul>
   </li>
+  <li><a href="#future-features">Future features</a></li>
   <li><a href="#license">License</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#acknowledgements">Acknowledgements</a></li>
