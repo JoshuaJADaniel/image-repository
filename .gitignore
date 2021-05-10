@@ -22,3 +22,5 @@ yarn-error.log*
 
 #other
 /.idea
+/api/vendor
+/api/config.php
