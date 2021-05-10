@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
@@ -23,18 +23,6 @@ const Profile = () => {
     history.push("/");
   }
 
-  const getPublicItems = useCallback(
-    (callback, nextGroupKey, nextKey) =>
-      getUserUploads(callback, nextGroupKey, nextKey, setToDelete, "public"),
-    []
-  );
-
-  const getPrivateItems = useCallback(
-    (callback, nextGroupKey, nextKey) =>
-      getUserUploads(callback, nextGroupKey, nextKey, setToDelete, "private"),
-    []
-  );
-
   const [publicItems, setPublicItems] = useState([]);
   const [privateItems, setPrivateItems] = useState([]);
 
@@ -42,11 +30,14 @@ const Profile = () => {
     getLoggedIn((loggedIn) => {
       if (loggedIn) {
         setName(jwtDecode(localStorage.getItem("jwt"))["name"]);
+
+        getUserUploads(setPublicItems, setToDelete, "public");
+        getUserUploads(setPrivateItems, setToDelete, "private");
       } else {
         history.push("/");
       }
     });
-  }, [history, getPrivateItems, privateItems]);
+  }, [history]);
 
   return (
     <DefaultTemplate title="Image Repository | Profile">
@@ -71,17 +62,9 @@ const Profile = () => {
         />
       </Box>
       {page === "public uploads" ? (
-        <Feed
-          items={publicItems}
-          setItems={setPublicItems}
-          getItems={getPublicItems}
-        />
+        <Feed items={publicItems} />
       ) : (
-        <Feed
-          items={privateItems}
-          setItems={setPrivateItems}
-          getItems={getPrivateItems}
-        />
+        <Feed items={privateItems} />
       )}
     </DefaultTemplate>
   );
